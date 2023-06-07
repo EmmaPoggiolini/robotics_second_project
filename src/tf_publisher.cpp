@@ -8,10 +8,11 @@
 #include "std_msgs/String.h"
 
 class TFPublisher {
-   public:
-    TFPublisher() {
-        odom_sub = n.subscribe("/t265/odom", 1000, &TFPublisher::tf_callback, this);
-    }
+   private:
+    ros::NodeHandle n;
+
+    tf::TransformBroadcaster br;
+    ros::Subscriber odom_sub;
 
     void tf_callback(const nav_msgs::Odometry::ConstPtr& msg) {
         // TF
@@ -23,15 +24,15 @@ class TFPublisher {
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
     }
 
-   private:
-    ros::NodeHandle n;
-
-    tf::TransformBroadcaster br;
-    ros::Subscriber odom_sub;
+   public:
+    TFPublisher() {
+        odom_sub = n.subscribe("/t265/odom", 1000, &TFPublisher::tf_callback, this);
+    }
 };
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "tf_publisher");
-
+    TFPublisher tf_publisher;
+    ros::spin();
     return 0;
 }
