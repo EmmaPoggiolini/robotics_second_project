@@ -1,7 +1,7 @@
 <launch>
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
-        <remap from="cloud_in" to="/os_cloud_node/points"/>
-        <remap from="scan" to="/scan"/>
+        <remap from="cloud_in" to="/velodyne_points"/>
+        <remap from="scan" to="/2d_Scanner"/>
         <param name="min_height" value="0.2"/>
         <param name="max_height" value="0.6"/>
         <param name="angle_increment" value="0.004"/>
