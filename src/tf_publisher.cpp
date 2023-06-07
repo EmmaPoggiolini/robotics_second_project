@@ -1,0 +1,35 @@
+#include <tf/transform_broadcaster.h>
+
+#include <sstream>
+
+#include "geometry_msgs/Quaternion.h"
+#include "nav_msgs/Odometry.h"
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+class TfPublisher {
+   public:
+    TfPublisher() {
+        odom_sub = n.subscribe("/t265/odom", 1000, &TfPublisher::tf_callback, this);
+    }
+
+    void tf_callback(const nav_msgs::Odometry::ConstPtr& msg) {
+        // TF
+        tf::Transform transform;
+        transform.setOrigin(tf::Vector3(msg->pose.pose.position.x, msg->pose.pose.position.y,  0));
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
+    }
+
+   private:
+    ros::NodeHandle n;
+
+    tf::TransformBroadcaster br;
+    ros::Subscriber odom_sub;
+}
+
+int
+main(int argc, char const* argv[]) {
+    ros::init(argc, argv, "tf_publisher");
+
+    return 0;
+}
