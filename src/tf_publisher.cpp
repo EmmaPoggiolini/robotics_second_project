@@ -7,16 +7,19 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
-class TfPublisher {
+class TFPublisher {
    public:
-    TfPublisher() {
-        odom_sub = n.subscribe("/t265/odom", 1000, &TfPublisher::tf_callback, this);
+    TFPublisher() {
+        odom_sub = n.subscribe("/t265/odom", 1000, &TFPublisher::tf_callback, this);
     }
 
     void tf_callback(const nav_msgs::Odometry::ConstPtr& msg) {
         // TF
         tf::Transform transform;
-        transform.setOrigin(tf::Vector3(msg->pose.pose.position.x, msg->pose.pose.position.y,  0));
+        transform.setOrigin(tf::Vector3(
+            msg->pose.pose.position.x,
+            msg->pose.pose.position.y,
+            msg->pose.pose.position.z));
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
     }
 
@@ -25,10 +28,9 @@ class TfPublisher {
 
     tf::TransformBroadcaster br;
     ros::Subscriber odom_sub;
-}
+};
 
-int
-main(int argc, char const* argv[]) {
+int main(int argc, char** argv) {
     ros::init(argc, argv, "tf_publisher");
 
     return 0;
