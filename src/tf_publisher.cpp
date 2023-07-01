@@ -26,7 +26,7 @@ class TFPublisher {
             msg->pose.pose.orientation.y,
             msg->pose.pose.orientation.z,
             msg->pose.pose.orientation.w));
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "base_footprint", "base_link"));
     }
 
    public:
