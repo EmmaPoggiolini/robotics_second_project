@@ -1,4 +1,4 @@
-image: map2.pgm
+image: map_bag1_2d_scan.pgm
 resolution: 0.050000
 origin: [-8.615736, -6.199275, 0.000000]
 negate: 0

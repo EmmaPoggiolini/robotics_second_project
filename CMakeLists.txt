@@ -27,6 +27,9 @@ include_directories(
 )
 
 add_executable(tf_publisher src/tf_publisher.cpp)
+add_executable(navigation src/navigation.cpp)
 # add_dependencies(tf_publisher second_project_generate_messages_cpp)
 target_link_libraries(tf_publisher ${catkin_LIBRARIES})
+target_link_libraries(navigation ${catkin_LIBRARIES})
 add_dependencies(tf_publisher ${catkin_EXPORTED_TARGETS})
+add_dependencies(navigation ${catkin_EXPORTED_TARGETS})
