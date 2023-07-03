@@ -6,8 +6,8 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
   <arg name="3d_sensor"  default="astra"/>  
 
   <!-- Name of the map to use and initial position -->
-  <arg name="map_file"       default="$(find second_project)/map_raw/maze.yaml"/> <!-- robopark_plan -->
-  <arg name="world_file"     default="$(find second_project)/map_raw/stage/maze.world"/>
+  <arg name="map_file"       default="$(find second_project)/maps_raw/map_bag1_2d_scan.yaml"/> <!-- robopark_plan -->
+  <arg name="world_file"     default="$(find second_project)/map_raw/stage/maze.world"/> <!-- can we ignore it? -->
   <arg name="initial_pose_x" default="2.0"/>
   <arg name="initial_pose_y" default="2.0"/>
   <arg name="initial_pose_a" default="0.0"/>
@@ -44,7 +44,7 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
     <param name="controller_frequency" value="5.0" />
     <param name="controller_patience" value="5.0" /> <!-- How long the controller will wait in seconds without receiving a valid control before space-clearing operations are performed.  -->
 
-    <param name="clearing_rotation_allowed" value="true"/> 
+    <param name="clearing_rotation_allowed" value="true"/> <!-- TODO: don't think it is allowed -->
   </node>
 
 
