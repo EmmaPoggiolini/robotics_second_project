@@ -16,6 +16,8 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
+
 class Navigation {
    private:
     ros::NodeHandle n;
@@ -23,7 +25,7 @@ class Navigation {
     // csv file
     std::fstream file;
 
-    actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac;
+    MoveBaseClient* ac;
 
     bool read_line() {
         std::string line;
@@ -47,7 +49,7 @@ class Navigation {
             goal.target_pose.pose.position.y = values[1];
             goal.target_pose.pose.position.z = 0.0;
             goal.target_pose.pose.orientation = tf::createQuaternionMsgFromYaw(values[2]);
-            ac.sendGoal(goal);
+            ac->sendGoal(goal);
             ROS_INFO("New goal published: (%f, %f, %f)", values[0], values[1], values[2]);
             return true;
         }
@@ -68,12 +70,17 @@ class Navigation {
 
    public:
     Navigation() {
-        file = std::fstream("/root/robotics/src/robotics_second_project/waypoints.csv", std::ios::in);
+        std::string path;
+        n.getParam("/navigation/csv_path", path);
+        file = std::fstream(path, std::ios::in);
         if (!file.is_open()) {
             ROS_ERROR_STREAM("Failed to open CSV file.");
+            ROS_ERROR_STREAM(path);
         }
-
-        ac = actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>("move_base", true);
+        ac = new MoveBaseClient("move_base", true);
+        while (!ac->waitForServer(ros::Duration(5.0))) {
+            ROS_INFO("Waiting for the move_base action server to come up");
+        }
 
         ROS_INFO("Initializing navigation node...");
         goal_sub = n.subscribe("/move_base/result", 1000, &Navigation::goal_callback, this);

@@ -5,14 +5,16 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  actionlib
   move_base
+  move_base_msgs
   tf
 )
 
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES second_project
- CATKIN_DEPENDS roscpp rospy std_msgs
+ CATKIN_DEPENDS roscpp rospy std_msgs actionlib move_base_msgs
 #  DEPENDS system_lib
 )
 

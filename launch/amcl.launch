@@ -27,8 +27,9 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
   </node>
 
   <!-- ***************** Goal publisher ***************** -->
-  <!-- <node pkg="second_project" type="navigation" name="navigation" output="screen" /> -->
-
+  <node pkg="second_project" type="navigation" name="navigation" output="screen">
+    <param name="csv_path" value="$(find second_project)/waypoints.csv" />
+  </node>
 
   <!--  ************** Navigation  ***************  -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
