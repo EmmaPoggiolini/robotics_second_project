@@ -21,7 +21,7 @@ typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseCl
 class Navigation {
    private:
     ros::NodeHandle n;
-    ros::Subscriber goal_sub;
+
     // csv file
     std::fstream file;
 
@@ -56,20 +56,9 @@ class Navigation {
         return false;
     }
 
-    void goal_callback(const move_base_msgs::MoveBaseActionResult::ConstPtr& msg) {
-        if (msg->status.status == 3) {
-            ROS_INFO("Goal reached!");
-            if (!read_line()) {
-                ROS_INFO("No more goals!");
-                file.close();
-            }
-        } else {
-            ROS_INFO("Goal not reached!");
-        }
-    }
-
    public:
     Navigation() {
+        ROS_INFO("Initializing navigation node...");
         std::string path;
         n.getParam("/navigation/csv_path", path);
         file = std::fstream(path, std::ios::in);
@@ -82,10 +71,13 @@ class Navigation {
             ROS_INFO("Waiting for the move_base action server to come up");
         }
 
-        ROS_INFO("Initializing navigation node...");
-        goal_sub = n.subscribe("/move_base/result", 1000, &Navigation::goal_callback, this);
-        read_line();
         ROS_INFO("Navigation node initialized!");
+
+        while (read_line()) {
+            ac->waitForResult();
+            ROS_INFO("Goal reached, proceeding with next goal!");
+        }
+        ROS_INFO("No more goals to publish!");
     }
 };
 
