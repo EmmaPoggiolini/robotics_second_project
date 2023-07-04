@@ -40,6 +40,11 @@ roslaunch second_project amcl.launch
 
 This will also launch the `navigation` node and RViz with the `config_navigation.rviz` configuration.
 
+This is the map with the chosen waypoints:
+
+![waypoint map](waypoints.png)
+
+
 ## Nodes and other packages used:
 
 - `pointcloud_to_laserscan` to convert velodyne pointcloud to laserscan
