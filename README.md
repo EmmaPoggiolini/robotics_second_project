@@ -23,7 +23,7 @@ Prerequisites:
   - Linux environment
   - ROS noetic  
 
-## Generating the map:
+## Generating the Map:
 
 Launchfile for generating the map with the provided single plane scanner data (from `/scan` topic):
 
@@ -48,7 +48,7 @@ After the map was generated, it was saved by running:
 rosrun map_server map_saver -f <map_name>
 ```
 
-## Running the navigation:
+## Running the Navigation:
 
 The map chosen for navigation was the map generated from the converted 2D scanner by playing the first bag; noise was removed in post-processing.
 
@@ -67,7 +67,7 @@ This is the map with the chosen waypoints:
 ![waypoint map](waypoints.png)
 
 
-## Nodes and other packages used:
+## Nodes and Other Packages Used:
 
 - `pointcloud_to_laserscan` to convert velodyne pointcloud to laserscan
 - `slam_toolbox` with `gmapping` to generate the map (detailed config in `cfg/st_config_scan.yaml`)
