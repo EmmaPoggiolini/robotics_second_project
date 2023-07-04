@@ -39,3 +39,15 @@ roslaunch second_project amcl.launch
 ```
 
 This will also launch the `navigation` node and RViz with the `config_navigation.rviz` configuration.
+
+## Nodes and other packages used:
+
+- `pointcloud_to_laserscan` to convert velodyne pointcloud to laserscan
+- `slam_toolbox` with `gmapping` to generate the map (detailed config in `cfg/st_config_scan.yaml`)
+- `tf` and `tf2_ros` for static transforms
+- `rviz` for visualization
+- `stage_ros` for stage simulation
+- `move_base` for the navigation stack
+- `amcl` for localization
+- `map_server` for saving/serving the map
+- `amcl` for autonomous navigation
