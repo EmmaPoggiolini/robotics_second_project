@@ -6,9 +6,9 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
   <arg name="3d_sensor" default="astra" />
 
   <!-- Name of the map to use and initial position -->
-  <arg name="map_file" default="$(find second_project)/maps_raw/map_bag1_2d_scan.yaml" /> <!--
+  <arg name="map_file" default="$(find second_project)/stage/final_map.yaml" /> <!--
   robopark_plan -->
-  <arg name="world_file" default="$(find second_project)/maps_raw/maze.world" /> <!-- can we ignore
+  <arg name="world_file" default="$(find second_project)/stage/maze.world" /> <!-- can we ignore
   it? -->
   <arg name="initial_pose_x" default="0.0" />
   <arg name="initial_pose_y" default="0.0" />
@@ -79,5 +79,5 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
 
 
   <!--  **************** Visualisation ****************  -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find second_project)/robot_navigation.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find second_project)/config_nav.rviz" />
 </launch>
