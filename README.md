@@ -1,5 +1,7 @@
 # Robotics Second Project - Mapping and Autonomous Navigation
 
+This repository contains the source code for the generation of an environment map by performing SLAM, and of robot navigation using the DWA local planner. 
+
 ## Code Organization
 
 - `CMakeList.txt` this file contains a description of the project's source files and targets
@@ -13,17 +15,13 @@
 - `config_mapping.rviz` this file contains the rviz configuration parameters for the generation of the map
 - `config_nav.rviz` this file contains the rviz configuration parameters for the robot navigation 
 - `waypoints.csv` this file contains the waypoints read by the `navigation` node to set the new goal
+- `waypoints.png` this file contains an image of the map chosen for navigation, with the pose and sequence number of the selected waypoints 
 
 ## Installation 
 
 Prerequisites:
   - Linux environment
   - ROS noetic  
-
-### Two nodes are implemented:
-
-- `tf_publisher`: publishes the tf between odom and t265 frames based on the t265 odometry
-- `navigation`: reads a csv file (defined in the `/navigation/csv_path` parameter) and publishes the next goals via move base action
 
 ## Generating the map:
 
