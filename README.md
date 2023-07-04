@@ -62,6 +62,11 @@ This also launches the `navigation` node and RViz with the `config_navigation.rv
 
 The `navigation` node reads a sequence of waypoints, one at a time, from the `waypoints.csv` file; each waypoint represents the new goal that the robot attempts to reach. 
 
+This is the map with the chosen waypoints:
+
+![waypoint map](waypoints.png)
+
+
 ## Nodes and other packages used:
 
 - `pointcloud_to_laserscan` to convert velodyne pointcloud to laserscan
